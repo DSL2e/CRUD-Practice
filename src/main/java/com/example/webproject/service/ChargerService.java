@@ -1,7 +1,6 @@
 package com.example.webproject.service;
-
-import com.example.webproject.domain.item.Item;
-import com.example.webproject.repository.ItemRepository;
+import com.example.webproject.domain.Charger;
+import com.example.webproject.repository.ChargerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,17 +10,19 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ItemService {
+public class ChargerService {
 
-    private final ItemRepository itemRepository;
+    private final ChargerRepository chargerRepository;
     @Transactional
-    public void saveItem(Item item) {
-        itemRepository.save(item);
+    public void saveCharger(Charger charger) {
+        chargerRepository.save(charger);
     }
-    public List<Item> findItems() {
-        return itemRepository.findAll();
+
+    public List<Charger> findItems() {
+        return chargerRepository.findAll();
     }
-    public Item findOne(Long itemId) {
-        return itemRepository.findOne(itemId);
+
+    public Charger findOne(Long itemId) {
+        return chargerRepository.findOne(itemId);
     }
 }

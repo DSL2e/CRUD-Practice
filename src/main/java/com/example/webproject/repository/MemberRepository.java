@@ -1,13 +1,15 @@
-package com.example.webproject;
+package com.example.webproject.repository;
 
 import com.example.webproject.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
     @PersistenceContext
     private EntityManager em;
@@ -25,7 +27,7 @@ public class MemberRepository {
                 .getResultList();
     }
 
-    public List<Member> findAll(String name){
+    public List<Member> findByName(String name){
         return em.createQuery("SELECT  m from  Member m where m.name = :name", Member.class)
                 .setParameter("name", name)
                 .getResultList();

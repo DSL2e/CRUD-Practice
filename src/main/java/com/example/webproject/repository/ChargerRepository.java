@@ -1,6 +1,6 @@
 package com.example.webproject.repository;
 
-import com.example.webproject.domain.item.Item;
+import com.example.webproject.domain.Charger;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -9,23 +9,24 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ItemRepository {
+public class ChargerRepository {
 
-    private  final EntityManager em;
+    private final EntityManager em;
 
-    public void save(Item item){
-        if (item.getId() == null){
-            em.persist(item); // 신규등록
+    public void save(Charger charger){
+        if (charger.getId() == null){
+            em.persist(charger);
         } else {
-            em.merge(item);
+            em.merge(charger);
         }
     }
 
-    public Item findOne(Long id) {
-           return em.find(Item.class, id);
+    public List<Charger> findAll(){
+        return em.createQuery("select c from Charger c",Charger.class).getResultList();
     }
-    public List<Item> findAll() {
-        return em.createQuery("select i from Item i",Item.class).getResultList();
+
+    public Charger findOne(Long id) {
+           return em.find(Charger.class, id);
     }
 }
 

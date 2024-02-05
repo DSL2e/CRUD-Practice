@@ -14,10 +14,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class MemverServiceTest {
+public class MemberServiceTest {
 
-    @Autowired
-    MemberService memberService;
+    @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
 
     @Test
@@ -33,13 +32,20 @@ public class MemverServiceTest {
         assertEquals(member, memberRepository.findOne(saveId));
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void 중복_회원_예외() throws Exception{
         //given
+        Member member1 = new Member();
+        member1.setName("LEE");
 
+        Member member2 = new Member();
+        member2.setName("LEE");
         //when
+        memberService.join(member1);
+        memberService.join(member2);
 
         //then
+        fail("중복!!");
     }
 
 }
